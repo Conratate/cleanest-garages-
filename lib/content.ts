@@ -85,9 +85,9 @@ const [essential, fullReset, total] = packages
 
 export const floorCleaning = {
   sizes: [
-    { label: '1-car garage', price: 129 },
-    { label: '2-car garage', price: 169 },
-    { label: '3-car garage', price: 219 },
+    { label: '1-car garage', price: 169 },
+    { label: '2-car garage', price: 209 },
+    { label: '3-car garage', price: 259 },
   ],
   addOns: [
     { label: 'Oil and rust stain treatment', price: 49 },

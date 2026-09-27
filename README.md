@@ -1,51 +1,37 @@
 # Cleanest Garages
 
-A professional garage cleaning services platform built with Next.js and React.
+Website for Cleanest Garages: garage cleanouts, buying customers' valuables, junk removal, and floor cleaning.
 
 ## Getting Started
 
-### Prerequisites
-- Node.js 20.9+
-- npm or yarn
-
-### Installation
+Requires Node.js 20.9+.
 
 ```bash
 npm install
-```
-
-### Development
-
-Run the development server:
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-### Build for Production
+## Editing the site
 
-```bash
-npm run build
-npm start
-```
+- **Prices, services, FAQ, and "what we buy"**: all in `lib/content.ts`. Change a price there and it updates everywhere on the site.
+- **Before/after slider**: uses the illustrations in `public/illustrations/`. To use real job photos, add them to `public/` and change `beforeSrc` / `afterSrc` in `components/sections/hero.tsx`.
+- **Domain**: set in `lib/site.ts`.
 
-## Features
+## Quote form (Netlify Forms)
 
-- Professional garage cleaning services
-- Deep cleaning and organization
-- Pressure washing services
-- Responsive design with Tailwind CSS
-- Modern Next.js 16 architecture
+The quote form submits to Netlify Forms. `public/__forms.html` is a hidden copy of the form that Netlify reads at deploy time. If you add or rename a field in `components/quote-form.tsx`, add the same field name to `public/__forms.html`.
+
+In the Netlify dashboard:
+
+1. **Forms**: enable form detection, then redeploy.
+2. **Forms > Form notifications**: add an email notification so new quote requests go to your inbox.
+
+The form only works on the deployed Netlify site, not on `localhost`.
 
 ## Tech Stack
 
-- **Framework**: Next.js 16
-- **Styling**: Tailwind CSS
-- **Language**: TypeScript
-- **Hosting**: Netlify
-
-## License
-
-MIT
+- Next.js 16, React 19, TypeScript
+- Tailwind CSS 4
+- Hosted on Netlify

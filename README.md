@@ -5,7 +5,7 @@ A professional garage cleaning services platform built with Next.js and React.
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 20.9+
 - npm or yarn
 
 ### Installation
@@ -37,14 +37,14 @@ npm start
 - Deep cleaning and organization
 - Pressure washing services
 - Responsive design with Tailwind CSS
-- Modern Next.js 14 architecture
+- Modern Next.js 16 architecture
 
 ## Tech Stack
 
-- **Framework**: Next.js 14
+- **Framework**: Next.js 16
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
-- **Deployment**: Ready for Vercel
+- **Hosting**: Netlify
 
 ## License
 

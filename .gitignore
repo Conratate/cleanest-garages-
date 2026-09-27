@@ -7,3 +7,6 @@ build/
 .env
 .env.local
 .env.*.local
+.netlify/
+next-env.d.ts
+*.tsbuildinfo

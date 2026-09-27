@@ -1,3 +1,26 @@
+const services = [
+  {
+    title: 'Garage Cleanout',
+    description:
+      'We clear out the clutter, sort what you want to keep, and organize everything so you can actually use your garage again.',
+  },
+  {
+    title: 'We Buy Your Stuff',
+    description:
+      "Got tools, equipment, or other items you don't need anymore? We'll make you an offer and take them off your hands.",
+  },
+  {
+    title: 'Junk Removal',
+    description:
+      "Anything you don't want, we haul away. No trips to the dump, no heavy lifting on your end.",
+  },
+  {
+    title: 'Floor & Deep Cleaning',
+    description:
+      'Once it\'s empty, we get it spotless. Pressure washing the floor, scrubbing out stains, and cleaning around the whole garage.',
+  },
+]
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
@@ -31,13 +54,11 @@ export default function Home() {
       <section id="services" className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">Our Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {['Deep Cleaning', 'Organization', 'Pressure Washing'].map((service) => (
-              <div key={service} className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h4 className="text-xl font-bold text-slate-900 mb-3">{service}</h4>
-                <p className="text-slate-600">
-                  Professional {service.toLowerCase()} services tailored to your garage needs.
-                </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service) => (
+              <div key={service.title} className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h4>
+                <p className="text-slate-600">{service.description}</p>
               </div>
             ))}
           </div>

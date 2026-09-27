@@ -1,6 +1,6 @@
-import { Check, Droplets } from 'lucide-react'
+import { Check, Droplets, Minus } from 'lucide-react'
 import { ButtonLink, SectionHeading } from '../ui'
-import { floorCleaning, packages } from '@/lib/content'
+import { floorCleaning, packageFeatures, packages } from '@/lib/content'
 
 export function Pricing() {
   return (
@@ -9,18 +9,19 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Pricing"
           title="Simple, upfront pricing"
-          description="Pick the package that fits your garage. You'll get an exact price before we start, and anything we buy from you can come off the total."
+          description="Light, medium, or heavy: pick the job that matches your garage. You'll get an exact price before we start, and anything we buy from you can come off the total."
         />
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3 lg:items-center">
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {packages.map((pkg) => {
             const featured = pkg.featured
+            const muted = featured ? 'text-slate-300' : 'text-slate-500'
             return (
               <div
                 key={pkg.name}
                 className={
                   featured
-                    ? 'relative flex flex-col rounded-2xl bg-navy-900 p-8 text-white shadow-2xl ring-2 ring-blue-500 lg:py-12'
+                    ? 'relative flex flex-col rounded-2xl bg-navy-900 p-8 text-white shadow-2xl ring-2 ring-blue-500'
                     : 'relative flex flex-col rounded-2xl bg-white p-8 ring-1 ring-slate-200'
                 }
               >
@@ -29,24 +30,64 @@ export function Pricing() {
                     Recommended
                   </span>
                 )}
-                <h3 className={`font-expanded text-xl font-bold tracking-tight ${featured ? 'text-white' : 'text-navy-900'}`}>
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${featured ? 'bg-white/10 text-yellow-300' : 'bg-slate-100 text-navy-900'}`}
+                  >
+                    {pkg.level} job
+                  </span>
+                  <span className="flex items-end gap-1" aria-hidden="true">
+                    {[1, 2, 3].map((bar) => (
+                      <span
+                        key={bar}
+                        className={`w-1.5 rounded-sm ${bar <= pkg.intensity ? (featured ? 'bg-yellow-400' : 'bg-blue-600') : featured ? 'bg-white/15' : 'bg-slate-200'}`}
+                        style={{ height: `${6 + bar * 4}px` }}
+                      />
+                    ))}
+                  </span>
+                </div>
+                <h3 className={`mt-5 font-expanded text-xl font-bold tracking-tight ${featured ? 'text-white' : 'text-navy-900'}`}>
                   {pkg.name}
                 </h3>
-                <p className={`mt-1 text-sm ${featured ? 'text-slate-300' : 'text-slate-500'}`}>{pkg.bestFor}</p>
-                <p className={`mt-6 text-sm font-medium ${featured ? 'text-slate-300' : 'text-slate-500'}`}>Starting at</p>
+                <p className={`mt-1 text-sm ${muted}`}>{pkg.bestFor}</p>
+                <p className={`mt-6 text-sm font-medium ${muted}`}>Starting at</p>
                 <p className={`font-expanded text-5xl font-extrabold tracking-tight ${featured ? 'text-white' : 'text-navy-900'}`}>
                   ${pkg.price}
                 </p>
-                <ul className={`mt-8 space-y-3 text-sm ${featured ? 'text-slate-200' : 'text-slate-700'}`}>
-                  {pkg.features.map((feature) => (
-                    <li key={feature} className="flex gap-3">
-                      <Check
-                        className={`mt-0.5 size-4 shrink-0 ${featured ? 'text-yellow-400' : 'text-blue-600'}`}
-                        strokeWidth={3}
-                      />
-                      {feature}
-                    </li>
-                  ))}
+
+                <div className={`mt-6 rounded-xl p-4 ${featured ? 'bg-white/5 ring-1 ring-inset ring-white/10' : 'bg-slate-50'}`}>
+                  <p className={`text-xs font-bold uppercase tracking-wider ${muted}`}>Right for you if</p>
+                  <ul className={`mt-2 space-y-1 text-sm ${featured ? 'text-slate-200' : 'text-slate-700'}`}>
+                    {pkg.signs.map((sign) => (
+                      <li key={sign}>• {sign}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <p className={`mt-6 text-xs font-bold uppercase tracking-wider ${muted}`}>What&apos;s included</p>
+                <ul className="mt-3 space-y-3 text-sm">
+                  {packageFeatures.map((feature) => {
+                    const included = pkg.intensity >= feature.from
+                    return (
+                      <li
+                        key={feature.label}
+                        className={`flex gap-3 ${included ? (featured ? 'text-slate-200' : 'text-slate-700') : featured ? 'text-slate-500' : 'text-slate-400'}`}
+                      >
+                        {included ? (
+                          <Check
+                            className={`mt-0.5 size-4 shrink-0 ${featured ? 'text-yellow-400' : 'text-blue-600'}`}
+                            strokeWidth={3}
+                          />
+                        ) : (
+                          <Minus className="mt-0.5 size-4 shrink-0" />
+                        )}
+                        <span className={included ? '' : 'line-through'}>
+                          {feature.label}
+                          <span className="sr-only">{included ? ' (included)' : ' (not included)'}</span>
+                        </span>
+                      </li>
+                    )
+                  })}
                 </ul>
                 <div className="mt-auto pt-8">
                   <ButtonLink href="#quote" variant={featured ? 'primary' : 'outline'} className="w-full">
@@ -85,7 +126,9 @@ export function Pricing() {
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-500">
           Prices are starting points for a typical garage. Your final price depends on size, how much we haul,
-          and any heavy or bulky items, and you&apos;ll always get it upfront, before we start.
+          and any heavy or bulky items, and you&apos;ll always get it upfront, before we start. Dump fees are
+          included in {packages[2].name}; for the other packages they&apos;re passed along at cost and shown in
+          your quote.
         </p>
       </div>
     </section>

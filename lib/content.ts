@@ -28,48 +28,57 @@ import {
 
 type Package = {
   name: string
+  level: 'Light' | 'Medium' | 'Heavy'
+  intensity: 1 | 2 | 3
   price: number
   bestFor: string
-  features: string[]
+  signs: string[]
   featured?: boolean
 }
 
 export const packages: Package[] = [
   {
     name: 'Essential',
+    level: 'Light',
+    intensity: 1,
     price: 249,
     bestFor: '1-car garage or light clutter',
-    features: [
-      'Sort everything into keep, sell, and haul-away piles',
-      'Cash offers on anything worth selling',
-      "Haul away what you don't want",
-      'Sweep and blow out the floor',
-      'Everything you keep, put back neatly',
-    ],
+    signs: ['You can still walk through it', 'A few piles, boxes, and loose junk', 'Just needs a solid reset'],
   },
   {
     name: 'Full Reset',
+    level: 'Medium',
+    intensity: 2,
     price: 379,
     bestFor: '2-car garage or moderate clutter',
     featured: true,
-    features: [
-      'Everything in Essential',
-      'Organize into zones: tools, sports, seasonal, storage',
-      'Wipe down shelves, cabinets, and surfaces',
-      'Clear cobwebs, dust, and debris from walls and corners',
-    ],
+    signs: ["Boxes stacked up and you can't park inside", 'Stuff piled on shelves and the floor', 'Needs organizing, not just clearing'],
   },
   {
     name: 'Total Transformation',
+    level: 'Heavy',
+    intensity: 3,
     price: 599,
     bestFor: '3-car garage or heavy clutter',
-    features: [
-      'Everything in Full Reset',
-      'Floor pressure wash and degrease',
-      'Oil and rust stain treatment',
-      'Before-and-after photos of your garage',
-    ],
+    signs: ['Packed wall to wall with years of stuff', 'Moving, selling, or an estate cleanout', 'Floor needs a real deep clean'],
   },
+]
+
+// `from` is the lowest package intensity that includes the feature.
+export const packageFeatures: { label: string; from: 1 | 2 | 3 }[] = [
+  { label: 'Walkthrough with you before we start', from: 1 },
+  { label: 'Sort everything into keep, sell, and haul-away piles', from: 1 },
+  { label: 'Cash offers on anything worth selling', from: 1 },
+  { label: "Load up and haul away what you don't want", from: 1 },
+  { label: 'Sweep and blow out the floor', from: 1 },
+  { label: 'Everything you keep, put back neatly', from: 1 },
+  { label: 'Organize into zones: tools, sports, seasonal, storage', from: 2 },
+  { label: 'Wipe down shelves, cabinets, and surfaces', from: 2 },
+  { label: 'Clear cobwebs, dust, and debris from walls and corners', from: 2 },
+  { label: 'Dump and disposal fees included', from: 3 },
+  { label: 'Floor pressure wash and degrease', from: 3 },
+  { label: 'Oil and rust stain treatment', from: 3 },
+  { label: 'Before-and-after photos of your garage', from: 3 },
 ]
 
 const [essential, fullReset, total] = packages
@@ -256,6 +265,10 @@ export const faqs = [
   {
     question: 'How much does a garage cleanout cost?',
     answer: `Packages start at $${essential.price} for a 1-car garage or light clutter, $${fullReset.price} for a 2-car garage or moderate clutter, and $${total.price} for a 3-car garage or heavy clutter. Your exact price depends on your garage's size and how much we haul away, and you'll always get it before any work starts.`,
+  },
+  {
+    question: 'Are dump fees included?',
+    answer: `Yes in the ${total.name} package. For ${essential.name} and ${fullReset.name}, dump fees are passed along at cost, and they're included in the quote you get before we start.`,
   },
   {
     question: 'How do you decide what to offer for my stuff?',

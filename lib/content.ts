@@ -199,19 +199,17 @@ export const buyCategories: Category[] = [
 ]
 
 export const buyLooksFor = [
-  'The simple test: could it be resold online?',
-  'Electronics especially: laptops, desktops, phones, cameras, tablets',
-  'Brand-name items in good, working condition (or worth something for parts)',
-  'Most things worth roughly $10 to $2,000',
-  'Chargers, cases, and accessories included when possible',
+  'Electronics in good working order',
+  'Brand-name items with lasting value',
+  'Good overall condition',
+  'Original chargers, cases, and accessories when available',
 ]
 
 export const buyDoesNotBuy = [
-  'Cars and other vehicles',
-  'Fine jewelry and items worth more than about $2,000',
-  'Cheap, low-value stuff — a $3 shirt or worn-out odds and ends',
-  'Most everyday clothing (nice shoes or quality pieces? just ask)',
-  'Anything stolen, counterfeit, or without clear ownership',
+  'Vehicles',
+  'Fine jewelry and luxury valuables',
+  'Most clothing and everyday household items',
+  'Items without clear proof of ownership',
 ]
 
 export const buySteps = [

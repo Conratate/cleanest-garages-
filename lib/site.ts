@@ -1,3 +1,4 @@
 export const siteName = 'Cleanest Garages'
-// Netlify sets URL at build time to the site's primary address (the custom domain once it's connected).
-export const siteUrl = process.env.URL ?? 'https://cleanestgarages.com'
+// The one address Google should list. Canonical tags, the sitemap, and social previews all point here,
+// so copies of the site at the netlify.app address or www don't compete with it in search.
+export const siteUrl = 'https://cleanestgarage.com'

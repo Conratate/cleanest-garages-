@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'How Cleanest Garages handles the information you share with us.',
+  alternates: { canonical: '/privacy' },
 }
 
 const sections = [
